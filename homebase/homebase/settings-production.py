@@ -32,7 +32,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = [
     'corsheaders',
-    'hiking.apps.HikingConfig',
+    'datacenter',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'OwlsNest.urls'
+ROOT_URLCONF = 'homebase.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'OwlsNest.wsgi.application'
+WSGI_APPLICATION = 'homebase.wsgi.application'
 
 
 # Database
@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'OwlsNest.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'hiking.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'homebase.sqlite3'),
     }
 }
 

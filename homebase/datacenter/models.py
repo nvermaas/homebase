@@ -12,8 +12,8 @@ class Location(models.Model):
         (KIND_OBJECT, 'object'),
         (KIND_OTHER, 'other'),
     )
-    latitude = models.CharField(max_length=100)
-    longitude = models.CharField(max_length=40)
+    latitude = models.CharField(max_length=100, null=True)
+    longitude = models.CharField(max_length=40, null=True)
     date = models.DateTimeField('date',default=datetime.now)
     title = models.CharField(max_length=20)
     description = models.CharField(max_length=255, null=True)

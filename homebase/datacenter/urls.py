@@ -11,9 +11,6 @@ app_name = 'datacenter'
 # Additionally, we include login URLs for the browsable API.
 
 urlpatterns = [
-    # === REST VIEWS ===
-    #url(r'^$', views.api_root), # this would short cut the index url
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # /datacenter/locations
     url(r'^locations/$', views.LocationListView.as_view(), name='location-list'),
