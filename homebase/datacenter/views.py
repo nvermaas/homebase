@@ -32,12 +32,13 @@ class LocationListView(generics.ListCreateAPIView):
         serializer.save()
 
 class LocationDetailView(generics.RetrieveUpdateDestroyAPIView):
+    print("LocationDetailView()")
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
     # authentication_classes = (BasicAuthentication)
 
     # activate authenticatio requirement for this view
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     # permission_classes = (IsAuthenticatedOrReadOnly,)
 
     # override the put (from the mixins), to be able to access the request and its methods.
