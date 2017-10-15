@@ -1,3 +1,5 @@
+import django_filters
+from django_filters import rest_framework as filters
 
 from rest_framework import generics
 from rest_framework.authentication import BasicAuthentication
@@ -8,7 +10,31 @@ from .serializers import LocationSerializer
 
 from django.core.urlresolvers import reverse
 
+class LocationFilter(filters.FilterSet):
+
+    timestampContains = django_filters.CharFilter(name="timestamp", lookup_expr='contains') #/query?creationTimeContains=2015
+
+    # the Meta tag is used to generate filters automatically
+    class Meta:
+        model = Location
+
+        fields = {
+            'id': ['lt', 'gt'],                               # ../locations?id__gt=5&id__lt=10
+            'latitude': ['lt', 'gt'],
+            'longitude': ['lt', 'gt'],
+            'username' : ['exact', 'in'],                     # ../locations?username__in=Nico,Erik
+                                                              # ../locations/username=nvermaas
+            'title' : ['exact', 'icontains'],
+            'description': ['exact', 'icontains'],
+            'timestamp': ['gt','lt','gte','lte','contains','exact','year__lt', 'year__gt', 'month__lt', 'month__gt'],
+        }
+
+
 class LocationListView(generics.ListCreateAPIView):
+    # using the Django Filter Backend - https://django-filter.readthedocs.io/en/latest/index.html
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = LocationFilter
+
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
 
@@ -21,7 +47,7 @@ class LocationListView(generics.ListCreateAPIView):
         print("get_queryset() : user = " + str(self.request.user))
         print("query_params = " + str(self.request.query_params))
         print("request.data = " + str(self.request.data))
-        queryset = Location.objects.all()
+        queryset = Location.objects.all().order_by('-timestamp')
 
         return queryset
 
@@ -38,7 +64,7 @@ class LocationDetailView(generics.RetrieveUpdateDestroyAPIView):
     # authentication_classes = (BasicAuthentication)
 
     # activate authenticatio requirement for this view
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     # permission_classes = (IsAuthenticatedOrReadOnly,)
 
     # override the put (from the mixins), to be able to access the request and its methods.
