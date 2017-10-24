@@ -15,6 +15,11 @@ urlpatterns = [
     #/datacenter/locations/1
     url(r'locations/(?P<pk>[0-9]+)/$', views.LocationDetailView.as_view(), name='location-detail-view'),
 
+    # /datacenter/itmes
+    url(r'^items/$', views.ItemListView.as_view(), name='item-list'),
+
+    # /datacenter/items/1
+    url(r'items/(?P<pk>[0-9]+)/$', views.ItemDetailView.as_view(), name='item-detail-view'),
 
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

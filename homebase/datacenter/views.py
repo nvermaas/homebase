@@ -3,10 +3,10 @@ from django_filters import rest_framework as filters
 
 from rest_framework import generics
 from rest_framework.authentication import BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
-from .models import Location
-from .serializers import LocationSerializer
+from .models import Location, Item
+from .serializers import LocationSerializer, ItemSerializer
 
 from django.core.urlresolvers import reverse
 
@@ -24,7 +24,7 @@ class LocationFilter(filters.FilterSet):
             'longitude': ['lt', 'gt'],
             'username' : ['exact', 'in'],                     # ../locations?username__in=Nico,Erik
                                                               # ../locations/username=nvermaas
-            'title' : ['exact', 'icontains'],
+            'title': ['exact', 'icontains'],
             'description': ['exact', 'icontains'],
             'timestamp': ['gt','lt','gte','lte','contains','exact','year__lt', 'year__gt', 'month__lt', 'month__gt'],
         }
@@ -56,6 +56,7 @@ class LocationListView(generics.ListCreateAPIView):
         print("perform_create():")
         print("Location created by user : "+str(self.request.user))
         serializer.save()
+
 
 class LocationDetailView(generics.RetrieveUpdateDestroyAPIView):
     print("LocationDetailView()")
@@ -91,3 +92,34 @@ class LocationDetailView(generics.RetrieveUpdateDestroyAPIView):
         queryset = Location.objects.all()
 
         return queryset
+
+
+class ItemListView(generics.ListCreateAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+
+    # activate authenticatio requirement for this view
+    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    # overriding GET get_queryset to access the request
+    def get_queryset(self):
+        print("get_queryset() : user = " + str(self.request.user))
+
+        # only return the items for users that are listed in the 'restricted_to' field.
+
+        print("query_params = " + str(self.request.query_params))
+        print("request.data = " + str(self.request.data))
+        queryset = Item.objects.all().order_by('order')
+
+        return queryset
+
+
+class ItemDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
+    # authentication_classes = (BasicAuthentication)
+
+    # activate authenticatio requirement for this view
+    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
