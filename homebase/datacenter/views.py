@@ -112,7 +112,16 @@ class ItemListView(generics.ListCreateAPIView):
 
         print("query_params = " + str(self.request.query_params))
         print("request.data = " + str(self.request.data))
-        queryset = Item.objects.all().order_by('order')
+
+        user = str(self.request.user)
+        print("user : " + user)
+        print("auth : " + str(self.request.auth))
+
+        # permissions...
+        # https://docs.djangoproject.com/en/1.11/ref/models/querysets/
+        # only return the queryset that has restricted_to = null or restricted_to = user
+        # queryset = Item.objects.all().order_by('order')
+        queryset = Item.objects.filter(restricted_to=user) | Item.objects.filter(restricted_to=None)
 
         return queryset
 
