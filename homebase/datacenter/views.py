@@ -4,9 +4,11 @@ from django_filters import rest_framework as filters
 from rest_framework import generics
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework import viewsets, response, permissions
 
 from .models import Location, Item
-from .serializers import LocationSerializer, ItemSerializer
+from django.contrib.auth.models import User
+from .serializers import LocationSerializer, ItemSerializer, UserSerializer
 
 from django.core.urlresolvers import reverse
 
@@ -123,3 +125,23 @@ class ItemDetailView(generics.RetrieveUpdateDestroyAPIView):
     # activate authenticatio requirement for this view
     # permission_classes = (IsAuthenticated,)
     permission_classes = (IsAuthenticatedOrReadOnly,)
+
+
+class UserListView(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def retrieve(self, request, pk=None):
+        print("RETRIEVE "+pk)
+        if pk == '10':
+            print("user : " + str(self.request.user))
+            print("auth : " + str(self.request.auth))
+            return response.Response(UserSerializer(request.user,
+                context={'request':request}).data)
+        return super(UserDetailView, self).retrieve(request, pk)

@@ -1,5 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken.views import obtain_auth_token
 from . import views
 
 app_name = 'datacenter'
@@ -21,5 +23,9 @@ urlpatterns = [
     # /datacenter/items/1
     url(r'items/(?P<pk>[0-9]+)/$', views.ItemDetailView.as_view(), name='item-detail-view'),
 
+    url(r'^users$', views.UserListView.as_view()),
+    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetailView.as_view()),
+
+    url(r'^obtain-auth-token/$', csrf_exempt(obtain_auth_token))
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
