@@ -110,7 +110,7 @@ class ItemListView(generics.ListCreateAPIView):
 
         # only return the items for users that are listed in the 'restricted_to' field.
 
-        print("query_params = " + str(self.request.query_params))
+        print("query_paramss = " + str(self.request.query_params))
         print("request.data = " + str(self.request.data))
 
         user = str(self.request.user)
