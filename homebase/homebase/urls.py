@@ -18,9 +18,12 @@ from django.conf.urls import include, url
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^api-auth/', include('rest_framework.urls')),
-    url(r'^datacenter/', include('datacenter.urls')),
+    #url(r'^admin/', admin.site.urls),
+    #url(r'^api-auth/', include('rest_framework.urls')),
+    #url(r'^datacenter/', include('datacenter.urls')),
+    url(r'^homebase/admin/', admin.site.urls),
+    url(r'^homebase/api-auth/', include('rest_framework.urls')),
+    url(r'^', include('datacenter.urls')),
 ]
 
 

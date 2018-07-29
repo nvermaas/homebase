@@ -13,7 +13,7 @@ class Location(models.Model):
     )
     latitude = models.CharField(max_length=20, null=True)
     longitude = models.CharField(max_length=20, null=True)
-    timestamp = models.DateTimeField('date',default=datetime.now)
+    timestamp = models.DateTimeField('date',default=datetime.now, null=True)
     username = models.CharField(max_length=40)
     title = models.CharField(max_length=255, null=True)
     description = models.CharField(max_length=255, null=True)

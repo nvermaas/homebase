@@ -1,0 +1,1 @@
+python manage.py dumpdata datacenter --indent=4 > datacenter/fixtures/datacenter.json --settings=homebase.settings_dev

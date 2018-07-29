@@ -12,20 +12,23 @@ app_name = 'datacenter'
 urlpatterns = [
 
     # /datacenter/locations
-    url(r'^locations/$', views.LocationListView.as_view(), name='location-list'),
+    url(r'^homebase/locations/$', views.LocationListView.as_view(), name='location-list'),
 
     #/datacenter/locations/1
-    url(r'locations/(?P<pk>[0-9]+)/$', views.LocationDetailView.as_view(), name='location-detail-view'),
+    url(r'^homebase/locations/(?P<pk>[0-9]+)/$', views.LocationDetailView.as_view(), name='location-detail-view'),
 
-    # /datacenter/itmes
-    url(r'^items/$', views.ItemListView.as_view(), name='item-list'),
+    # /homebase/items
+    url(r'^homebase/items/$', views.ItemListView.as_view(), name='item-list'),
+    # /datacenter/items
+    url(r'^datacenter/items/$', views.ItemListView.as_view(), name='item-list'),
 
     # /datacenter/items/1
-    url(r'items/(?P<pk>[0-9]+)/$', views.ItemDetailView.as_view(), name='item-detail-view'),
+    url(r'^homebase/items/(?P<pk>[0-9]+)/$', views.ItemDetailView.as_view(), name='item-detail-view'),
+    url(r'^datacenter/items/(?P<pk>[0-9]+)/$', views.ItemDetailView.as_view(), name='item-detail-view'),
 
-    url(r'^users$', views.UserListView.as_view()),
-    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetailView.as_view()),
+    url(r'^homebase/users$', views.UserListView.as_view()),
+    url(r'^homebase/users/(?P<pk>[0-9]+)/$', views.UserDetailView.as_view()),
 
-    url(r'^obtain-auth-token/$', csrf_exempt(obtain_auth_token))
+    url(r'^homebase/obtain-auth-token/$', csrf_exempt(obtain_auth_token))
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)
