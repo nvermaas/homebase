@@ -10,7 +10,7 @@ from .models import Location, Item
 from django.contrib.auth.models import User
 from .serializers import LocationSerializer, ItemSerializer, UserSerializer
 
-from django.core.urlresolvers import reverse
+
 
 class LocationFilter(filters.FilterSet):
 

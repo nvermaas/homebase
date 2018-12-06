@@ -71,7 +71,7 @@ class Item(models.Model):
     kind = models.CharField(max_length=30, choices=KIND_CHOICES, default=KIND_OTHER)
     parent = models.CharField(max_length=40,default='',null=True)
     order = models.IntegerField(default=1)
-    restricted_to=models.CharField(max_length=255, default='',null=True)
+    restricted_to=models.CharField(max_length=255, default='',blank=True)
 
     def __str__(self):
         return self.name

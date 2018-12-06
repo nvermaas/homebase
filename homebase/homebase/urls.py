@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^homebase/admin/', admin.site.urls),
     url(r'^homebase/api-auth/', include('rest_framework.urls')),
     url(r'^', include('datacenter.urls')),
+    url(r'^', include('astro.urls')),
 ]
 
 
