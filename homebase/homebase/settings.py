@@ -25,7 +25,7 @@ SECRET_KEY = '!sls2(u-2^+*(ob%hc5xrifx0i#ekgguj%c3i_k@ia001w$it0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["80.101.27.83","localhost","192.168.178.32","127.0.0.1","uilennest.net"]
+ALLOWED_HOSTS = ["80.101.27.83","localhost","localhost:63343","192.168.178.32","127.0.0.1","uilennest.net"]
 CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition

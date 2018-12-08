@@ -10,9 +10,9 @@ app_name = 'astro'
 
 urlpatterns = [
 
-    # /homebase/items
+    # /homebase/moonphases
     url(r'^homebase/moonphases/$', views.MoonPhasesView.as_view({'get': 'list'}), name='moonphases-list'),
-    # /datacenter/items
+    # /datacenter/moonphases
     url(r'^datacenter/moonphases/$', views.MoonPhasesView.as_view({'get': 'list'}), name='moonphases-list'),
 
 ]

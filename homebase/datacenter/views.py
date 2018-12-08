@@ -61,7 +61,7 @@ class LocationListView(generics.ListCreateAPIView):
 
 
 class LocationDetailView(generics.RetrieveUpdateDestroyAPIView):
-    print("LocationDetailView()")
+
     queryset = Location.objects.all()
     serializer_class = LocationSerializer
     # authentication_classes = (BasicAuthentication)
@@ -73,7 +73,7 @@ class LocationDetailView(generics.RetrieveUpdateDestroyAPIView):
     # override the put (from the mixins), to be able to access the request and its methods.
     # http://www.django-rest-framework.org/api-guide/generic-views/
     def put(self, request, *args, **kwargs):
-        print("PUT:")
+        print("LocationDetailView.PUT:")
 
         # examples of accessing information from the request
         print("request.query_params = " + str(self.request.query_params))
