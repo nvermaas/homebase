@@ -3,8 +3,9 @@
 # ported to Python by Kevin Turner <acapnotic@twistedmatrix.com>
 # on June 6, 2001 (JDN 2452066.52491), under a full moon.
 #
-# This program is in the public domain: "Do what thou wilt shall be
-# the whole of the law".
+# Adapted: to be used in Django as a REST API with pure Python3 by Nico Vermaas on Dec 8 2018
+# http://uilennest.net/homebase/datacenter/moonphases/?year=2019
+# This program is in the public domain: "Do what thou wilt shall be the whole of the law".
 
 """Functions to find the phase of the moon.
 
@@ -312,15 +313,7 @@ def jd_to_date(jd):
 
     Returns
     -------
-    year : int
-        Year as integer. Years preceding 1 A.D. should be 0 or negative.
-        The year before 1 A.D. is 0, 10 B.C. is year -9.
-
-    month : int
-        Month as integer, Jan = 1, Feb. = 2, etc.
-
-    day : float
-        Day, may contain fractional part.
+    datetime object
 
     Examples
     --------
@@ -427,7 +420,7 @@ def get_new_moons(year):
     k = floor((startdate.year + ((startdate.month - 1) * (1.0 / 12.0)) - 1900) * 12.3685)
 
     start_jd = date_to_jd(startdate)
-    end_jd = date_to_jd(enddate)
+    end_jd = date_to_jd(enddate) + c.synodic_month
 
     jd = start_jd
 
