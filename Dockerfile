@@ -6,4 +6,5 @@ WORKDIR /code
 COPY requirements_docker.txt /code/
 RUN pip install -r requirements_docker.txt
 COPY . /code/
+WORKDIR /code/homebase
 CMD ["python", "manage.py", "runserver", "--settings=homebase.settings-docker", "0.0.0.0:8003"]
