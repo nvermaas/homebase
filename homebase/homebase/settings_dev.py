@@ -150,3 +150,6 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
     }
 }
+
+ENABLE_RABBITMQ = True
+RABBIT_URL = "amqp://nvermaas:RaBbIt_2019@192.168.178.37:5672/"

@@ -153,3 +153,8 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
     }
 }
+
+ENABLE_RABBITMQ = True
+running_rabbits = False
+RABBIT_URL = "http://192.168.178.37:5672/"
+RABBIT_PARAMETERS = ["http://192.168.178.37","5672","/",["nvermaas","RaBbIt_2019"]]

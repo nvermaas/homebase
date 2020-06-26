@@ -6,6 +6,7 @@ from .serializers import MoonPhasesSerializer
 import datetime
 from .my_moon.moon import get_new_moons
 
+
 class MoonPhasesView(viewsets.ViewSet):
     serializer_class = MoonPhasesSerializer
 

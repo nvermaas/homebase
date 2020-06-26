@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import datetime
 
+
 class Location(models.Model):
     KIND_PERSON = 'person'
     KIND_OBJECT = 'object'
