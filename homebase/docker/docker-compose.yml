@@ -2,16 +2,13 @@ version: '3.4'
 
 networks:
   homebase_network: 
-  traefik_proxy:
-    external:
-      name: traefik_proxy
   default:
     driver: bridge
 
 services:
-  homebase_api:
-    container_name: homebase_api
-    image: homebase_api:latest
+  my_homebase:
+    container_name: my_homebase
+    image: my_homebase:latest
     networks:
       - homebase_network
     expose: 
