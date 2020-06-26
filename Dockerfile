@@ -1,13 +1,13 @@
-FROM python:3.6.7-alpine
+FROM python:3.6.7-slim
+RUN apt-get update && apt-get install --no-install-recommends -y bash nano mc
 ENV PYTHONUNBUFFERED 1
-RUN mkdir /code
-RUN mkdir /code/requirements
-WORKDIR /code
-COPY requirements_docker.txt /code/
-RUN pip install -r requirements_docker.txt
-COPY . /code/
-WORKDIR /code/homebase
-CMD ["python", "manage.py", "runserver", "--settings=homebase.settings-docker", "0.0.0.0:8000"]
+
+RUN mkdir /src
+WORKDIR /src
+COPY . /src/
+RUN pip install -r requirements/prod.txt
+RUN exec python manage.py collectstatic --settings=homebase.settings-docker --no-input
+CMD exec gunicorn homebase.wsgi_docker:application --bind 0.0.0.0:8000 --workers 3
 
 # build the image
 # sudo docker build -t my_homebase:latest .
