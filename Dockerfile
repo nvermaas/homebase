@@ -15,4 +15,4 @@ CMD exec gunicorn homebase.wsgi_docker:application --bind 0.0.0.0:8000 --workers
 
 # run the container
 # cd ~/shared (make sure that homebase.sqlite3 is here)
-# sudo docker run --name my_homebase --mount type=bind,source="$(pwd)",target=/shared -p 8003:8000 --restart always my_homebase:latest &
+# sudo docker run -d --name my_homebase --mount type=bind,source="$(pwd)",target=/shared -p 8003:8000 --restart always my_homebase:latest &
