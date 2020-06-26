@@ -1,0 +1,38 @@
+version: '3.4'
+
+networks:
+  homebase_network: 
+  traefik_proxy:
+    external:
+      name: traefik_proxy
+  default:
+    driver: bridge
+
+services:
+  homebase_api:
+    container_name: homebase_api
+    image: homebase_api:latest
+    networks:
+      - homebase_network
+    expose: 
+      - 8000
+    restart: always
+    volumes:
+      - $HOME/shared:/shared
+
+  homebase_nginx:
+    build:
+        context: $HOME/shared
+        dockerfile: Dockerfile
+    container_name: my_nginx
+    image: my_nginx:latest
+    networks:
+      - homebase_network    
+    ports:
+      - 88:80
+    volumes:
+      - $HOME/shared:/shared
+      - $HOME/shared:/etc/nginx/conf.d 
+      - $HOME/shared/static:/static
+    restart: always
+
