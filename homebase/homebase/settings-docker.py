@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+SESSION_COOKIE_SECURE=True
+SESSION_COOKIE_HTTPONLY=True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
