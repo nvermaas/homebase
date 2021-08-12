@@ -13,17 +13,16 @@ urlpatterns = [
 
     # /datacenter/locations
     url(r'^homebase/locations/$', views.LocationListView.as_view(), name='location-list'),
-
-    #/datacenter/locations/1
     url(r'^homebase/locations/(?P<pk>[0-9]+)/$', views.LocationDetailView.as_view(), name='location-detail-view'),
+    url(r'^datacenter/locations/$', views.LocationListView.as_view(), name='location-list'),
+    url(r'^datacenter/locations/(?P<pk>[0-9]+)/$', views.LocationDetailView.as_view(), name='location-detail-view'),
 
     # /homebase/items
     url(r'^homebase/items/$', views.ItemListView.as_view(), name='item-list'),
+    url(r'^homebase/items/(?P<pk>[0-9]+)/$', views.ItemDetailView.as_view(), name='item-detail-view'),
+
     # /datacenter/items
     url(r'^datacenter/items/$', views.ItemListView.as_view(), name='item-list'),
-
-    # /datacenter/items/1
-    url(r'^homebase/items/(?P<pk>[0-9]+)/$', views.ItemDetailView.as_view(), name='item-detail-view'),
     url(r'^datacenter/items/(?P<pk>[0-9]+)/$', views.ItemDetailView.as_view(), name='item-detail-view'),
 
     url(r'^homebase/users$', views.UserListView.as_view()),
