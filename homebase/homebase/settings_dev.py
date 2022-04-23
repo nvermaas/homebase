@@ -151,5 +151,3 @@ WEBPACK_LOADER = {
     }
 }
 
-ENABLE_RABBITMQ = True
-RABBIT_URL = "amqp://nvermaas:RaBbIt_2019@192.168.178.37:5672/"

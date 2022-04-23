@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - update-2022
 
 jobs:
   build-deploy-homebase:
