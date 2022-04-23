@@ -61,7 +61,7 @@ ROOT_URLCONF = 'homebase.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, '../datacenter/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -151,5 +151,3 @@ WEBPACK_LOADER = {
     }
 }
 
-ENABLE_RABBITMQ = True
-RABBIT_URL = "amqp://nvermaas:RaBbIt_2019@192.168.178.37:5672/"
