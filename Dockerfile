@@ -8,6 +8,7 @@ COPY . /src/
 RUN pip install -r requirements/prod.txt
 WORKDIR /src/homebase
 RUN exec python manage.py collectstatic --settings=homebase.settings-docker --no-input
+RUN exec python manage.py migrate --settings=homebase.settings-docker --no-input
 CMD exec gunicorn homebase.wsgi_docker:application --bind 0.0.0.0:8000 --workers 3
 
 # build the image
