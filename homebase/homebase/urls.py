@@ -2,6 +2,8 @@
 from django.contrib import admin
 from django.urls import include, path
 
+admin.site.site_header = "Uilennest Homebase Administration"
+
 urlpatterns = [
 
     path('homebase/admin/', admin.site.urls),
