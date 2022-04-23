@@ -12,6 +12,8 @@ app_name = 'datacenter'
 # Additionally, we include login URLs for the browsable API.
 
 urlpatterns = [
+    path('', views.IndexView.as_view(), name='index'),
+
     # /homebase/items
     path('items/', views.ItemListView.as_view(), name='item-list'),
     path('items/<int:id>', views.ItemListView.as_view(), name='item-detail-view'),

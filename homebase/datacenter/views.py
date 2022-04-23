@@ -1,14 +1,18 @@
-import django_filters
-from django_filters import rest_framework as filters
+
+from django.views.generic import ListView
 
 from rest_framework import generics
-from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework import viewsets, response, permissions
 
 from .models import Item
-from django.contrib.auth.models import User
 from .serializers import ItemSerializer
+
+
+class IndexView(ListView):
+    queryset = Item.objects.all()
+    template_name = 'datacenter/index.html'
+
+
 
 class ItemListView(generics.ListCreateAPIView):
     queryset = Item.objects.all()
@@ -36,7 +40,7 @@ class ItemListView(generics.ListCreateAPIView):
         # only return the queryset that has restricted_to = null or restricted_to = user
 
         queryset = Item.objects.filter(restricted_to=user) | Item.objects.filter(restricted_to=None) | Item.objects.filter(restricted_to='')
-        queryset = Item.objects.all()
+        #queryset = Item.objects.all()
         return queryset
 
 
