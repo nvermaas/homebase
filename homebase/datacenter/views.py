@@ -13,7 +13,6 @@ class IndexView(ListView):
     template_name = 'datacenter/index.html'
 
 
-
 class ItemListView(generics.ListCreateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
@@ -36,18 +35,14 @@ class ItemListView(generics.ListCreateAPIView):
         print("auth : " + str(self.request.auth))
 
         # permissions...
-        # https://docs.djangoproject.com/en/1.11/ref/models/querysets/
         # only return the queryset that has restricted_to = null or restricted_to = user
-
         queryset = Item.objects.filter(restricted_to=user) | Item.objects.filter(restricted_to=None) | Item.objects.filter(restricted_to='')
-        #queryset = Item.objects.all()
         return queryset
 
 
 class ItemDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    # authentication_classes = (BasicAuthentication)
 
     # activate authenticatio requirement for this view
     # permission_classes = (IsAuthenticated,)
