@@ -1,8 +1,10 @@
-from django.conf.urls import url, include
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.urls import include, path
+from django.contrib.auth import views as auth_views
+from rest_framework.authtoken import views as rest_auth_views
+from . import views
+
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.views import obtain_auth_token
-from . import views
 
 app_name = 'datacenter'
 
@@ -10,24 +12,17 @@ app_name = 'datacenter'
 # Additionally, we include login URLs for the browsable API.
 
 urlpatterns = [
-
-    # /datacenter/locations
-    url(r'^homebase/locations/$', views.LocationListView.as_view(), name='location-list'),
-    url(r'^homebase/locations/(?P<pk>[0-9]+)/$', views.LocationDetailView.as_view(), name='location-detail-view'),
-    url(r'^datacenter/locations/$', views.LocationListView.as_view(), name='location-list'),
-    url(r'^datacenter/locations/(?P<pk>[0-9]+)/$', views.LocationDetailView.as_view(), name='location-detail-view'),
+    path('', views.IndexView.as_view(), name='index'),
 
     # /homebase/items
-    url(r'^homebase/items/$', views.ItemListView.as_view(), name='item-list'),
-    url(r'^homebase/items/(?P<pk>[0-9]+)/$', views.ItemDetailView.as_view(), name='item-detail-view'),
+    path('items/', views.ItemListView.as_view(), name='item-list'),
+    path('items/<int:id>', views.ItemListView.as_view(), name='item-detail-view'),
 
-    # /datacenter/items
-    url(r'^datacenter/items/$', views.ItemListView.as_view(), name='item-list'),
-    url(r'^datacenter/items/(?P<pk>[0-9]+)/$', views.ItemDetailView.as_view(), name='item-detail-view'),
+    # authentication
+    path('accounts/', include('django.contrib.auth.urls')),
 
-    url(r'^homebase/users$', views.UserListView.as_view()),
-    url(r'^homebase/users/(?P<pk>[0-9]+)/$', views.UserDetailView.as_view()),
+    # specialization of the above, with more control
+    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html')),
 
-    url(r'^homebase/obtain-auth-token/$', csrf_exempt(obtain_auth_token))
+    path('obtain-auth-token', csrf_exempt(obtain_auth_token)),
 ]
-urlpatterns = format_suffix_patterns(urlpatterns)

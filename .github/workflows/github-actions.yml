@@ -17,7 +17,7 @@ jobs:
           password: ${{ secrets.MY_PASSWORD }}
           #key: ${{ secrets.MY_PRIVATE_KEY }}
           script: |
-             cd ~/my_docker/homebase
+             cd ~/my_docker/homebase/homebase
              git pull
              docker build -t my_homebase:latest .
              cd $HOME/shared
