@@ -1,4 +1,4 @@
-name: build-deploy-hiking
+name: build-deploy-homebase-aws
 on:
   push:
     branches:

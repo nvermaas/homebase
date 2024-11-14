@@ -11,8 +11,8 @@ RUN exec python manage.py collectstatic --settings=homebase.settings.docker --no
 CMD exec gunicorn homebase.wsgi_docker:application --bind 0.0.0.0:8000 --workers 3
 
 # build the image
-# sudo docker build -t my_homebase:latest .
+# docker build -t my_homebase:latest .
 
 # run the container
 # cd ~/shared (make sure that homebase.sqlite3 is here)
-# sudo docker run -d --name my_homebase --mount type=bind,source="$(pwd)",target=/shared -p 8003:8000 --restart always my_homebase:latest &
+# docker run -d --name my_homebase --mount type=bind,source=$HOME/shared,target=/shared -p 8003:8000 --restart always my_homebase:latest &
