@@ -32,5 +32,5 @@ jobs:
 
              # deploy with nomad
              cd $HOME/my_nomad_datacenter/jobs
-             nomad stop my_homebase
+             nomad stop my_homebase 
              nomad run my_homebase.nomad
