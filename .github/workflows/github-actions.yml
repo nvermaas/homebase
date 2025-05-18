@@ -22,8 +22,8 @@ jobs:
              docker build -t my_homebase:latest .
             
              # tag for nomad, which uses rootful docker, so needs a pull from a repo
-             docker tag my_homebase:latest middle-earth:5000/my_homebase:latest
-             docker push middle-earth:5000/my_homebase:latest
+             #docker tag my_homebase:latest middle-earth:5000/my_homebase:latest
+             #docker push middle-earth:5000/my_homebase:latest
             
              cd $HOME/shared
              docker stop my_homebase
@@ -31,6 +31,6 @@ jobs:
              docker-compose -p dockernest up -d
 
              # deploy with nomad
-             cd $HOME/my_nomad_datacenter/jobs
-             nomad stop my_homebase 
-             nomad run my_homebase.nomad
+             #cd $HOME/my_nomad_datacenter/jobs
+             #nomad stop my_homebase 
+             #nomad run my_homebase.nomad
