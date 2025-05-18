@@ -9,12 +9,12 @@ from .serializers import ItemSerializer
 
 
 class IndexView(ListView):
-    queryset = Item.objects.all()
+    queryset = Item.objects.order_by('order')
     template_name = 'datacenter/index.html'
 
 
 class ItemListView(generics.ListCreateAPIView):
-    queryset = Item.objects.all()
+    #queryset = Item.objects.order_by('order')
     serializer_class = ItemSerializer
 
     # activate authenticatio requirement for this view
@@ -36,7 +36,7 @@ class ItemListView(generics.ListCreateAPIView):
 
         # permissions...
         # only return the queryset that has restricted_to = null or restricted_to = user
-        queryset = Item.objects.filter(restricted_to=user) | Item.objects.filter(restricted_to=None) | Item.objects.filter(restricted_to='')
+        queryset = (Item.objects.filter(restricted_to=user) | Item.objects.filter(restricted_to=None) | Item.objects.filter(restricted_to='')).order_by('order')
         return queryset
 
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.timezone import datetime
 
 
@@ -61,13 +62,13 @@ class Item(models.Model):
     url_image = models.URLField(max_length=255, default='',blank=True)
     url_link  = models.URLField(max_length=255, default='',blank=True)
     url_link_type = models.CharField(max_length=10, choices=BUTTON_TYPE_CHOICES, default='primary')
-    url_link_label = models.CharField(max_length=15, default='GO!')
+    url_link_label = models.CharField(max_length=15, default='GO!', null=True,blank=True)
     url_docs = models.URLField(max_length=255, default='', blank=True)
     url_docs_type = models.CharField(max_length=10, choices=BUTTON_TYPE_CHOICES, default='info')
-    url_docs_label = models.CharField(max_length=15, default='docs')
+    url_docs_label = models.CharField(max_length=15, default='docs', null=True,blank=True)
     url_wiki = models.URLField(max_length=255, default='', blank=True)
     url_wiki_type = models.CharField(max_length=10, choices=BUTTON_TYPE_CHOICES, default='warning')
-    url_wiki_label = models.CharField(max_length=15, default='wiki')
+    url_wiki_label = models.CharField(max_length=15, default='wiki', null=True,blank=True)
 
     kind = models.CharField(max_length=30, choices=KIND_CHOICES, default=KIND_OTHER)
     parent = models.CharField(max_length=40,default='',null=True)
